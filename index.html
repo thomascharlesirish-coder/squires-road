@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1b1a17" />
+  <meta name="description" content="The Squire’s Road — honor-based daily duties, gold, ranks, and a knight who sharpens with discipline." />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <title>The Squire’s Road</title>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title">The Squire’s Road</div>
+        <div class="brand-subtitle" id="rankLabel">Town Guard</div>
+      </div>
+      <div class="topbar-right">
+        <div class="pill">
+          <span class="pill-label">Gold</span>
+          <span class="pill-value" id="goldValue">0</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Primary">
+      <button class="tab active" data-screen="home">Road</button>
+      <button class="tab" data-screen="duties">Duties</button>
+      <button class="tab" data-screen="goals">Goals</button>
+      <button class="tab" data-screen="keep">Keep</button>
+      <button class="tab" data-screen="record">Record</button>
+    </nav>
+
+    <main class="content">
+      <!-- ROAD -->
+      <section class="screen active" id="screen-home">
+        <div class="card hero">
+          <div class="hero-left">
+            <div class="hero-title" id="statusTitle">Your duties await.</div>
+            <div class="hero-text" id="statusText">Take the road in honest effort. No one watches—save your own oath.</div>
+            <div class="hero-actions">
+              <button class="btn primary" id="btnBegin">Begin Duties</button>
+              <button class="btn ghost" id="btnInstall" hidden>Install</button>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-label">Streak</div>
+                <div class="stat-value" id="streakValue">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Longest</div>
+                <div class="stat-value" id="bestStreakValue">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Duties Today</div>
+                <div class="stat-value" id="dutiesTodayValue">0/5</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="silhouette-wrap">
+              <div class="silhouette" id="silhouette"></div>
+              <div class="silhouette-caption" id="silhouetteCaption">A rough outline—yet the road begins.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Today’s Oath</div>
+          <div class="card-text" id="oathText">
+            “I will do what I said I would do—quietly, without excuse.”
+          </div>
+        </div>
+      </section>
+
+      <!-- DUTIES -->
+      <section class="screen" id="screen-duties">
+        <div class="card">
+          <div class="card-title">Daily Duties</div>
+          <div class="card-text">Mark what you’ve done. Gold is earned by honest effort.</div>
+          <div class="list" id="dutiesList"></div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div>
+              <div class="card-title">Day Complete</div>
+              <div class="card-text">If you’ve done enough to “stand your watch,” seal the day.</div>
+              <div class="tiny">Default rule: seal the day when you complete <b>3 of 5</b> duties.</div>
+            </div>
+            <button class="btn primary" id="btnSealDay">Seal the Day</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GOALS -->
+      <section class="screen" id="screen-goals">
+        <div class="card">
+          <div class="card-title">Large Goals</div>
+          <div class="card-text">These move your rank. Keep them manageable. Repeat as needed.</div>
+
+          <div class="goals" id="goalsList"></div>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <div>
+              <div class="tiny">Quick add (MVP):</div>
+              <div class="tiny muted">You can edit/expand later—this is just to start using it.</div>
+            </div>
+            <button class="btn ghost" id="btnAddGoal">Add Goal</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- KEEP -->
+      <section class="screen" id="screen-keep">
+        <div class="card">
+          <div class="card-title">The Keep</div>
+          <div class="card-text">Spend gold on comforts and symbols. Your worth is in the record.</div>
+
+          <div class="shop-grid">
+            <div class="shop-col">
+              <div class="shop-title">Backgrounds</div>
+              <div class="shop-items" id="shopBackgrounds"></div>
+            </div>
+            <div class="shop-col">
+              <div class="shop-title">Homes</div>
+              <div class="shop-items" id="shopHomes"></div>
+            </div>
+            <div class="shop-col">
+              <div class="shop-title">Titles</div>
+              <div class="shop-items" id="shopTitles"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECORD -->
+      <section class="screen" id="screen-record">
+        <div class="card">
+          <div class="card-title">Record</div>
+          <div class="record-grid">
+            <div class="record-item">
+              <div class="record-label">Current Rank</div>
+              <div class="record-value" id="recordRank">Town Guard</div>
+            </div>
+            <div class="record-item">
+              <div class="record-label">Days on the Road</div>
+              <div class="record-value" id="recordDays">0</div>
+            </div>
+            <div class="record-item">
+              <div class="record-label">Total Duties Completed</div>
+              <div class="record-value" id="recordDuties">0</div>
+            </div>
+            <div class="record-item">
+              <div class="record-label">Total Gold Earned</div>
+              <div class="record-value" id="recordGoldEarned">0</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <button class="btn danger" id="btnReset">Reset App Data</button>
+            <div class="tiny muted">Local-only. This clears everything on this device.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Rank-up Ceremony Modal -->
+  <div class="modal-backdrop" id="ceremonyBackdrop" hidden>
+    <div class="modal">
+      <div class="modal-title" id="ceremonyTitle">Rank Achieved</div>
+      <div class="modal-subtitle" id="ceremonyRank">Mercenary</div>
+      <div class="modal-text" id="ceremonyText"></div>
+      <div class="modal-actions">
+        <button class="btn primary" id="btnCeremonyClose">Take the Road</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
